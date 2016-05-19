@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block body %}
+<form method="POST" action="/add_rule">
+    <fieldset class="form-group">
+        <p>Fill the below form.</p>
+        <p>Notation WxyZ -> Wxt + ytZ </p>
+        
+    </fieldset>
+    <fieldset class="form-group">
+        <input type="text" name="x" placeholder="x" ></input>
+        <input type="text" name="y" placeholder="y" ></input>
+        -
+        <input type="text" name="xt" placeholder="xt"></input>
+        <input type="text" name="yt" placeholder="yt"></input>
+    </fieldset>
+    <fieldset class="form-group">
+        <button class="btn btn-primary">Add rule</button>
+    </fieldset>
+</form>
+{% endblock %}

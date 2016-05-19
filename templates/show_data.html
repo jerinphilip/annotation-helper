@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Populated Entries</h1>
+<div class="row">
+    <div class="col-12-md col=12-xs">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>wid</th>
+                    <th>word</th>
+                    <th>splits</th>
+                    <th>location</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in entries %}
+                <tr>
+                    <td>{{ entry.wid }}</td>
+                    <td>{{ entry.word }}</td>
+                    <td>{{ entry.split_word|safe }}</td>
+                    <td>{{ entry.split_location|safe }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

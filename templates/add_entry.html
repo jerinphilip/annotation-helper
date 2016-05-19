@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block body %}
+<h1>Add Entry</h1>
+<div class="row">
+    <div class="col-6-md col-6-xs">
+        <form action="/add" method="post">
+            <fieldset class="form-group">
+                <input class="form-control" type="text" name="word" placeholder="word"></input>
+            </fieldset>
+            <fieldset class="form-group">
+                <input class="form-control" type="text" name="split_word" placeholder="word1+word2"></input>
+            </fieldset>
+            <fieldset class="form-group">
+                <input class="form-control" type="text" name="split_location" placeholder="split1+split2"></input>
+            </fieldset>
+            <fieldset class="form-group">
+                <input class="form-control" type="submit" name="Submit" value="submit"></input>
+            </fieldset>
+        </form>
+    </div>
+
+    {% endblock %}

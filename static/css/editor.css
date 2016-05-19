@@ -1,0 +1,37 @@
+.word {
+    background: #eee;
+    border-radius: 5px solid black;
+    padding: 5px;
+    display: inline-block;
+    font-size: 16pt;
+
+} 
+
+.word-button {
+    display: inline-block;
+    border: 1px solid black;
+    margin: 3px;
+}
+
+.character, .symbol {
+    background: #eee;
+    border-radius: 5px solid black;
+    padding: 5px;
+    margin: 5px;
+    display: inline-block;
+    font-size: 18pt;
+}
+
+.delete-word {
+    display: inline-block;
+    margin: 0px;
+
+}
+
+#wordpane {
+    margin-bottom: 10px;
+}
+
+#wordpool {
+    border: 1px solid black;
+}

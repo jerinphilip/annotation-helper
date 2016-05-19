@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/editor.css') }}"/>
+{% endblock %}
+{% block body %}
+<h1>Annotation Helper</h1>
+<div class="row" id="phase-1">
+    <div id="primary" class="col-xs-12 col-md-12">
+        <p>Enter text containing words in the below text box to be annotated</p>
+        <fieldset class="form-group">
+            <textarea id="textInput" class="form-control"></textarea>
+        </fieldset>
+        <fieldset class="form-group">
+            <button id="textAreaSubmit" class="form-control btn btn-primary">Submit</button>
+        </fieldset>
+    </div>
+</div>
+<div id="phase-2">
+    <div class="row" id="wordpane">
+        <div class="col-xs-11 col-md-11">
+            <div class="row">
+                <div class="col-xs-12 col-md-12" id="statuspane">
+                    current status
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12" id="editpane">
+                    edit pane.
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-1 col-md-1">
+            <button class="btn btn-primary" id="finalSubmit">Add</button>
+        </div>
+    </div>
+    <div class="row" id="wordpool-wrapper">
+        <p> Click on one of the below words to annotate word </p>
+        <div class="col-xs-2 col-md-2" id="rules"></div>
+            {% for rule in rules %}
+            {{ x }} {{ y }} - {{ xt }} {{ yt }}
+            {% endfor %}
+        <div class="col-xs-10 col-md-10" id="wordpool">
+            A lot of words appear here.
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script src="{{ url_for('static', filename='js/ml-rules.js') }}"></script>
+<script src="{{ url_for('static', filename='js/helper.js') }}"></script>
+{% endblock %}
