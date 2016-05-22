@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-<form method="POST" action="/add_rule">
+<form method="POST" action="/rules">
     <fieldset class="form-group">
         <p>Fill the below form.</p>
         <p>Notation WxyZ -> Wxt + ytZ </p>
@@ -12,9 +12,40 @@
         -
         <input type="text" name="xt" placeholder="xt"></input>
         <input type="text" name="yt" placeholder="yt"></input>
+        <select name="lang">
+            <option>ml</option>
+        </select>
     </fieldset>
     <fieldset class="form-group">
         <button class="btn btn-primary">Add rule</button>
     </fieldset>
 </form>
+
+<div class="row">
+    <div class="col-md-12 col xs-12">
+    <table class="table">
+        <thead>
+            <tr>
+            <td> id </td>
+            <td> x </td>
+            <td> y </td>
+            <td> xt </td>
+            <td> yt </td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rule in rules %}
+        <tr>
+            <td>{{rule.rid}} </td>
+            <td>{{rule.x}} </td>
+            <td>{{rule.y}}</td>
+            <td>{{rule.xt}} </td>
+            <td>{{rule.yt}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+</div>
 {% endblock %}

@@ -1,11 +1,16 @@
 $(document).ready(function(){
-    var word;
+    var word=null;
     var words = [];
     var locations = [];
     var activeWord = null;
 
+    var id = function(x, y){
+        return [x, y];
+    };
+    var activeRule = rule_based;
+    var ruleDict = {};
 
-    var status_pane_reset = function(){
+    var transforms = function(word, locations){
         var splits = [];
         var current = 0;
         for(var i=0; i<locations.length; i++){
@@ -14,15 +19,27 @@ $(document).ready(function(){
             splits.push(currentWord);
             current = pos;
         }
-        //console.log(current);
-        //console.log(word.length);
-
-        // Add semi automation for rules? :D
 
         var lastWord = word.slice(current, word.length);
         splits.push(lastWord);
-        //splits = rule_based_transforms(splits);
-        splits = rule_based_transforms(splits);
+
+        for(var i=0; i<splits.length-1; i++){
+            var first = splits[i];
+            var second = splits[i+1];
+
+            var f = ruleDict[locations[i]];
+            var result = f(first, second);
+
+            splits[i] = result[0];
+            splits[i+1] = result[1];
+
+        }
+        return splits;
+
+    }
+
+    var status_pane_reset = function(){
+        splits = transforms(word, locations);
         words = splits;
         var content = splits.join('+')
         $('#statuspane').html(content);
@@ -39,7 +56,7 @@ $(document).ready(function(){
         var words = content.split(' ');
         words = words.filter(function(x){
             //Set threshold here, for convenience.
-            return x.length >= 15;
+            return x.length >= 10;
         });
         //console.log(words);
 
@@ -71,7 +88,8 @@ $(document).ready(function(){
         var data = {
             "word" : word,
             "split_word" : words.join('+'),
-            "split_location" : sortedLocations.join(',')
+            "split_location" : sortedLocations.join(','),
+            "lang": "ml"
         };
         $.ajax({
             url: '/add',
@@ -130,14 +148,48 @@ $(document).ready(function(){
 
         if(found != -1){
             locations.splice(found, 1);
+            ruleDict[found] = id;
         }
         else{
             locations.push(pos);
+            ruleDict[pos] = activeRule;
             locations = locations.sort(compare);
         }
         status_pane_reset();
         console.log(locations);
     });
 
+    $("#auto-rule").click(function(){
+        console.log("Auto rule enabled");
+        activeRule = rule_based;
+    });
+    $(".rule-select").click(function(e){
+        console.log("Rule select clicked");
+        t = e.target;
+        x = t.dataset.x;
+        y = t.dataset.y;
+        xt = t.dataset.xt;
+        yt = t.dataset.yt;
+        console.log({"x": x, "y": y, "xt":xt, "yt":yt});
 
+        var f = function(first, second){
+            fx = first.slice(first.length-x.length, first.length);
+            sy = second.slice(0, y.length-1);
+            console.log("fx="+fx);
+            console.log("x="+x);
+            console.log("y="+y);
+            console.log("sy="+sy);
+            if(fx == x)
+                tx = first.slice(0, first.length-x.length) + xt;
+            else
+                tx = first;
+            if(sy == y)
+                ty = yt + second.slice(y.length, second.length) ;
+            else
+                ty = second;
+            return [tx, ty];
+        };
+
+        activeRule = f;
+    });
 });
