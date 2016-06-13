@@ -1,10 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-<pre>
-<code>
 {% for entry in entries %}
-{{ entry.word }}|{{ entry.split_word|safe }}|{{ entry.split_location|safe }} 
+{{ entry.word }}={{ entry.split_word|safe }}|{{ entry.split_location|safe }}<br/>
 {% endfor %}
-</code>
-</pre>
 {% endblock %}

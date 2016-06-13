@@ -85,7 +85,7 @@ def add_entry_form():
 @app.route('/editor', methods=['GET'])
 def editor():
     cursor = g.db.execute('SELECT * from rules')
-    rules = [dict(x=row[1], y=row[1], xt=row[2], yt=row[3]) \
+    rules = [dict(x=row[1], y=row[2], xt=row[3], yt=row[4]) \
             for row in cursor.fetchall()]
     
     #print rules
@@ -119,6 +119,11 @@ def dump():
     entries = [dict(wid=row[0], word=row[1], split_word=row[2], split_location=row[3]) \
             for row in cursor.fetchall()]
     return render_template('dump.html', entries=entries);
+
+@app.route('/reset', methods=['GET'])
+def reset():
+    cursor = g.db.execute('delete from entries')
+    return "Entries cleared"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')

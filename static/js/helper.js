@@ -82,7 +82,7 @@ $(document).ready(function(){
     $('#finalSubmit').click(function(){
 
         //Sort locations
-        var str = function(num){ return num.toString(); };
+        var str = function(num){ return (num-1).toString(); };
         var sortedLocations = locations.map(str);
 
         var data = {
@@ -163,6 +163,11 @@ $(document).ready(function(){
         console.log("Auto rule enabled");
         activeRule = rule_based;
     });
+    
+     $("#auto-a-rule").click(function(){
+        console.log("Auto rule enabled");
+        activeRule = split_a;
+    });
     $(".rule-select").click(function(e){
         console.log("Rule select clicked");
         t = e.target;
@@ -174,7 +179,7 @@ $(document).ready(function(){
 
         var f = function(first, second){
             fx = first.slice(first.length-x.length, first.length);
-            sy = second.slice(0, y.length-1);
+            sy = second.slice(0, y.length);
             console.log("fx="+fx);
             console.log("x="+x);
             console.log("y="+y);
