@@ -168,6 +168,8 @@ $(document).ready(function(){
         console.log("Auto rule enabled");
         activeRule = split_a;
     });
+    
+   
     $(".rule-select").click(function(e){
         console.log("Rule select clicked");
         t = e.target;

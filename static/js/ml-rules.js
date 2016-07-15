@@ -14,12 +14,12 @@ var VowelMap  = {
 
 var rule_based = function(first, second){
     var l = first.length;
-    if((first[l-1] == 'യ' or first[l-1]=='വ') && second[0] in VowelMap){
+    if((first[l-1] == 'യ' || first[l-1]=='വ') && second[0] in VowelMap){
         // പതിവ് + ആയി  = പതിവായി 
         first = first.slice(0, l-1);
     }
     
-    else if((second[0] == 'യ' or second[0]=='വ') && second.length > 3 && 
+    else if((second[0] == 'യ' || second[0]=='വ') && second.length > 3 && 
             second[1]==second[3] && 
             second[2] == '്'){
             // Dont even ask
@@ -51,6 +51,10 @@ var rule_based = function(first, second){
 var split_a = function(first, second){
     first = first + '്';
     second = 'അ'+second;
+    return [first, second];
+}
+
+var just_split = function(first, second){
     return [first, second];
 }
 

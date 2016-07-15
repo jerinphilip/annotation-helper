@@ -123,6 +123,7 @@ def dump():
 @app.route('/reset', methods=['GET'])
 def reset():
     cursor = g.db.execute('delete from entries')
+    g.db.commit()
     return "Entries cleared"
 
 if __name__ == '__main__':
